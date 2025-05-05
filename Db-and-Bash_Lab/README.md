@@ -1,11 +1,5 @@
 # AWS RDS MySQL Project
 
-## SQL Scripts
-
-- `create_tables.sql`: Drops and creates schema
-- `insert_data.sql`: Populates data
-- `queries.sql`: Contains all required queries
-
 ## API
 
 - Built with FastAPI
@@ -18,11 +12,10 @@
 
 ## Setup
 
-1. Launch AWS RDS MySQL instance
-2. Run SQL scripts
 3. Install FastAPI: `pip install -r requirements.txt`
-4. Run: `uvicorn main:app --reload`
-5. Visit docs: `http://127.0.0.1:8000/docs`
+4. Change directory: `cd api`
+5. Run: `uvicorn db_api:app --reload`
+6. Visit docs: `http://34.241.173.68:8000/docs`
 
 ## Screenshots
 

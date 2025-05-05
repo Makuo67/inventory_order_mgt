@@ -6,10 +6,10 @@ app = FastAPI()
 
 def get_db_connection():
     return mysql.connector.connect(
-        host="amalitech-orders-db.c3iko6aysc46.eu-west-1.rds.amazonaws.com",
-        user="admin",
-        password="amalitech2025",
-        database="amalitech_orders_db"
+        host="",
+        user="",
+        password="",
+        database=""
     )
 
 
