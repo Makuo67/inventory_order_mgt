@@ -1,11 +1,11 @@
 # Inventory and Order Management Database
 
-A professional PostgreSQL relational database for e-commerce inventory and order management. Designed for 3NF normalization, this system supports customer orders, product catalog, stock tracking, and advanced business analytics through views, stored procedures, and complex queries.
+A PostgreSQL relational database for e-commerce inventory and order management. Designed for 3NF normalization, this system supports customer orders, product catalog, stock tracking, and advanced business analytics through views, stored procedures, and complex queries.
 
 **Key Features:**
 
 - Normalized schema with constraints and relationships
-- Sample data for 14 customers, 15 products, 10 orders
+- Sample data for customers, products, orders
 - KPI queries: revenue analysis, top customers/products, sales trends, category rankings
 - Reusable view (`CustomerSalesSummary`) and stored procedure (`ProcessNewOrder`)
 - Dockerized PostgreSQL deployment with auto-initialization
@@ -21,31 +21,20 @@ inventory_order_mgt/
 │   ├── .env.example             # Environment variables template
 │   └── init/
 │       ├── 01_schema.sql        # Table DDL (customers, products, inventory, orders, order_items)
-│       ├── 02_data.sql          # Sample data inserts
-│       └── 03_queries.sql       # KPIs, view, stored procedure
+│       ├── 02_data.sql
+|       ├── 03_queries.sql
+|       ├── 04_bad_data.sql       # Sample data inserts
+│       └── 05_order_placement_and_logs.sql
+|       # KPIs, view, stored procedure
 └── erd/
-    └── simba-database-schema.jpg # Entity-Relationship Diagram
+    └── simba_inventory_erd.jpg # Entity-Relationship Diagram
 ```
 
-## Database Schema
+##
 
-**Tables:**
+**ERD:**
 
-| Table         | Description       | Key Fields                                                                                |
-| ------------- | ----------------- | ----------------------------------------------------------------------------------------- |
-| `customers`   | Customer profiles | `customer_id` (PK), `fullname`, `email` (unique), `shipping_address`                      |
-| `products`    | Product catalog   | `product_id` (PK), `product_name`, `category`, `price`                                    |
-| `inventory`   | Stock levels      | `inventory_id` (PK), `product_id` (unique FK), `quantity_remaining`                       |
-| `orders`      | Order headers     | `order_id` (PK), `customer_id` (FK), `total_amount`, `status` (Pending/Shipped/Delivered) |
-| `order_items` | Order line items  | `order_items_id` (PK), `order_id`/`product_id` (FKs), `quantity`, `purchase_price`        |
-
-**Text ERD:**
-
-```
-customers 1 ---> * orders 1 ---> * order_items * <--- 1 products <--- 1 inventory
-```
-
-Full visual ERD: `erd/simba-database-schema.jpg`
+Full visual ERD: `erd/simba_inventory_erd.jpg`
 
 ## Setup Instructions
 
