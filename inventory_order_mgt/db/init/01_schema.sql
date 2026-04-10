@@ -37,7 +37,7 @@ CREATE TABLE products (
     category_id INT,
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
     CONSTRAINT fk_products_category FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE
-    SET NULL;
+    SET NULL
 );
 ------------------
 -- Categories Table
@@ -91,4 +91,17 @@ CREATE TABLE order_items (
     purchase_price DECIMAL(10, 2) NOT NULL CHECK (purchase_price >= 0),
     CONSTRAINT fk_order_items_product FOREIGN KEY(product_id) REFERENCES products(product_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT fk_order_items_order FOREIGN KEY(order_id) REFERENCES orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+-------------------
+-- ALerts Table
+-------------------
+CREATE TABLE low_stock_alerts (
+    alert_id SERIAL PRIMARY KEY,
+    product_id INT NOT NULL,
+    current_quantity INT NOT NULL,
+    reorder_level INT NOT NULL,
+    alert_message TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    is_resolved BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_alert_product FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 );
